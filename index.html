@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b12">
+<title>BARZ NOKOS — Dashboard</title>
+<style>
+:root{--bg:#080b12;--panel:#101725;--line:#24344a;--blue:#22baff;--text:#eef5ff;--muted:#91a1b9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+aside{width:220px;flex-shrink:0;background:#0b111c;border-right:1px solid var(--line);padding:22px 14px}
+.brand{font-size:23px;font-weight:900;letter-spacing:1px;padding:8px}
+.brand span{color:var(--blue)}
+.tag{font-size:10px;color:var(--muted);padding:0 8px 22px}
+.nav{display:flex;flex-direction:column;gap:7px}
+.nav button{background:transparent;color:#a9bad1;text-align:left;border:1px solid transparent;border-radius:10px;padding:13px}
+.nav button.active,.nav button:hover{background:#102338;color:#65d0ff;border-color:#24445e}
+.main{flex:1;min-width:0}
+.top{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top h1{font-size:19px;margin:0}
+.top p{font-size:12px;color:var(--muted);margin:6px 0 0}
+.online{color:#64e3ae;font-size:12px}
+.content{max-width:1100px;margin:auto;padding:22px}
+.welcome{padding:22px;border:1px solid #214363;border-radius:17px;background:linear-gradient(120deg,#11253a,#101725 70%);margin-bottom:17px}
+.welcome h2{font-size:22px;margin:0 0 8px}
+.welcome p{color:#a8bad0;line-height:1.6;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:17px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}
+.label{font-size:12px;color:var(--muted)}
+.metric{font-size:23px;font-weight:bold;margin:12px 0 7px;overflow-wrap:anywhere}
+.blue{color:var(--blue)}
+.green{color:#64e3ae}
+.section-title{font-size:16px;font-weight:bold;margin:0 0 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+select,input{width:100%;background:#0a111c;color:var(--text);border:1px solid #2a3d54;border-radius:9px;padding:12px;outline:none}
+.primary{background:#087fca;color:white;border:0;border-radius:9px;padding:12px 15px;font-weight:bold;width:100%;margin-top:10px}
+.secondary{background:#152338;color:#d7e8fa;border:1px solid #2b425c;border-radius:9px;padding:10px}
+.item{padding:13px 0;border-bottom:1px solid #243146;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.item:last-child{border-bottom:0}
+.item b{font-size:13px}
+.item small{display:block;color:var(--muted);margin-top:5px}
+.pill{font-size:10px;color:#74d8ff;background:#112d43;padding:5px 8px;border-radius:20px;white-space:nowrap}
+.hidden{display:none!important}
+.note{color:var(--muted);font-size:12px;line-height:1.6}
+#toast{color:#70d9ff;font-size:12px;margin-top:12px}
+footer{text-align:center;color:#64758d;font-size:11px;padding:22px}
+@media(max-width:700px){
+ aside{width:67px;padding:15px 6px}
+ .brand{font-size:13px;padding:8px 2px}
+ .tag{display:none}
+ .nav button{font-size:0;text-align:center;padding:14px 2px}
+ .nav button:first-letter{font-size:17px}
+ .top{padding:16px}
+ .content{padding:13px}
+ .grid{grid-template-columns:1fr 1fr;gap:9px}
+ .grid .card:last-child{grid-column:1/-1}
+ .two{grid-template-columns:1fr}
+ .welcome h2{font-size:19px}
+ .metric{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <div class="brand">BARZ<span>.</span></div>
+  <div class="tag">CONTROL PANEL</div>
+  <nav class="nav">
+    <button class="active" data-page="dashboard">▦ Dashboard</button>
+    <button data-page="services">▤ Layanan</button>
+    <button data-page="countries">◎ Negara</button>
+    <button data-page="deposit">＋ Deposit</button>
+    <button data-page="history">◷ Riwayat</button>
+  </nav>
+</aside>
+
+<div class="main">
+  <header class="top">
+    <div>
+      <h1 id="pageTitle">Dashboard</h1>
+      <p>BARZ NOKOS / Control Panel</p>
+    </div>
+    <span class="online">● Demo Mode</span>
+  </header>
+
+  <main class="content">
+    <section id="dashboard" class="page">
+      <div class="welcome">
+        <h2>Welcome to <span class="blue">BARZ NOKOS</span></h2>
+        <p>Dashboard layanan dengan antarmuka modern, sederhana, dan responsif.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="label">Saldo akun</div>
+          <div class="metric blue">Rp 0</div>
+          <div class="label">Belum terhubung</div>
+        </div>
+        <div class="card">
+          <div class="label">Total layanan</div>
+          <div class="metric">3</div>
+          <div class="label">Data contoh</div>
+        </div>
+        <div class="card">
+          <div class="label">Status sistem</div>
+          <div class="metric green">Siap</div>
+          <div class="label">Mode tampilan</div>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="section-title">Aktivitas terbaru</h2>
+        <div class="note">Belum ada aktivitas. Data akan muncul setelah backend dan fitur resmi dikonfigurasi.</div>
+      </div>
+    </section>
+
+    <section id="services" class="page hidden">
+      <div class="card">
+        <h2 class="section-title">Katalog layanan</h2>
+        <input id="search" placeholder="Cari nama layanan...">
+        <div id="serviceList">
+          <div class="item"><div><b>Layanan A</b><small>Kategori contoh</small></div><span class="pill">Demo</span></div>
+          <div class="item"><div><b>Layanan B</b><small>Kategori contoh</small></div><span class="pill">Demo</span></div>
+          <div class="item"><div><b>Layanan C</b><small>Kategori contoh</small></div><span class="pill">Demo</span></div>
+        </div>
+        <p class="note">Katalog ini hanya contoh visual, belum terhubung ke penyedia layanan.</p>
+      </div>
+    </section>
+
+    <section id="countries" class="page hidden">
+      <div class="card">
+        <h2 class="section-title">Pilihan negara</h2>
+        <label class="label" for="country">Pilih negara untuk preferensi tampilan</label>
+        <select id="country" style="margin-top:9px">
+          <option>🇮🇩 Indonesia</option>
+          <option>🇲🇾 Malaysia</option>
+          <option>🇸🇬 Singapura</option>
+          <option>🇹🇭 Thailand</option>
+          <option>🇻🇳 Vietnam</option>
+          <option>🇵🇭 Filipina</option>
+        </select>
+        <p id="countryResult" class="note">Negara pilihan: Indonesia</p>
+      </div>
+    </section>
+
+    <section id="deposit" class="page hidden">
+      <div class="card">
+        <h2 class="section-title">Deposit saldo</h2>
+        <div class="label">Saldo saat ini</div>
+        <div class="metric blue">Rp 0</div>
+        <label class="label" for="amount">Nominal simulasi (Rp)</label>
+        <input id="amount" type="number" min="1000" step="1000" placeholder="Contoh: 10000" style="margin-top:9px">
+        <button class="primary" id="depositBtn">Simulasikan deposit</button>
+        <p class="note">Ini hanya demo. Tidak ada pembayaran atau saldo nyata yang diproses.</p>
+        <div id="toast"></div>
+      </div>
+    </section>
+
+    <section id="history" class="page hidden">
+      <div class="card">
+        <h2 class="section-title">Riwayat aktivitas</h2>
+        <div id="historyList" class="note">Belum ada riwayat aktivitas.</div>
+      </div>
+    </section>
+  </main>
+  <footer>BARZ NOKOS © 2026 · Dashboard Demo</footer>
+</div>
+</div>
+
+<script>
+const pages=[...document.querySelectorAll(".page")];
+const nav=[...document.querySelectorAll("[data-page]")];
+const titles={
+ dashboard:"Dashboard",services:"Layanan",countries:"Negara",
+ deposit:"Deposit",history:"Riwayat"
+};
+nav.forEach(button=>{
+ button.addEventListener("click",()=>{
+   nav.forEach(n=>n.classList.toggle("active",n===button));
+   pages.forEach(p=>p.classList.toggle("hidden",p.id!==button.dataset.page));
+   document.getElementById("pageTitle").textContent=titles[button.dataset.page];
+ });
+});
+
+document.getElementById("country").addEventListener("change",e=>{
+ document.getElementById("countryResult").textContent=
+   "Negara pilihan: "+e.target.selectedOptions[0].textContent;
+});
+
+document.getElementById("search").addEventListener("input",e=>{
+ const term=e.target.value.toLowerCase();
+ document.querySelectorAll("#serviceList .item").forEach(item=>{
+   item.style.display=item.textContent.toLowerCase().includes(term)?"flex":"none";
+ });
+});
+
+document.getElementById("depositBtn").addEventListener("click",()=>{
+ const amount=Number(document.getElementById("amount").value);
+ const toast=document.getElementById("toast");
+ if(!Number.isFinite(amount)||amount<1000){
+   toast.textContent="Masukkan nominal minimal Rp 1.000.";
+   return;
+ }
+ toast.textContent="Simulasi Rp "+amount.toLocaleString("id-ID")+
+   ". Tidak ada transaksi nyata yang dilakukan.";
+});
+</script>
+</body>
+                           </html>
+        
