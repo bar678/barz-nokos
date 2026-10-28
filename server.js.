@@ -1,0 +1,40 @@
+
+const express = require("express");
+const path = require("path");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.disable("x-powered-by");
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    name: "BARZ NOKOS",
+    status: "online"
+  });
+});
+
+app.get("/api/profile", (req, res) => {
+  res.json({
+    success: true,
+    profile: {
+      name: "BARZ NOKOS",
+      balance: null,
+      message: "API belum dihubungkan."
+    }
+  });
+});
+
+app.get("/api/services", (req, res) => {
+  res.json({
+    success: true,
+    services: [],
+    message: "Katalog belum dikonfigurasi."
+  });
+});
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("BARZ NOKOS berjalan pada port " + PORT);
+});
